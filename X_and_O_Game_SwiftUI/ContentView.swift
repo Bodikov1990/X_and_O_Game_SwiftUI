@@ -13,14 +13,26 @@ struct ContentView: View {
                                GridItem(.flexible())]
     
     var body: some View {
-        
-        LazyVGrid(columns: columns){
-            Text("Kuat")
-            Text("Kuat")
-            Text("Kuat")
-            
+        GeometryReader { geometry in
+            VStack {
+                Spacer()
+                LazyVGrid(columns: columns){
+                    ForEach(0..<9) {i in
+                        ZStack {
+                            Circle()
+                                .foregroundColor(.blue).opacity(0.5)
+                                .frame(width: geometry.size.width/3 - 15,
+                                       height: geometry.size.width/3 - 15)
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                        }
+                    }
+                }
+                Spacer()
+            }
+            .padding()
         }
-        
     }
 }
 
