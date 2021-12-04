@@ -32,6 +32,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                         }
                         .onTapGesture {
+                            if isSquareOccupied(in: moves, forIndex: indexOfCircle) { return }
                             moves[indexOfCircle] = Move(player: isHumanTurn ? .human : .computer, boardIndex: indexOfCircle)
                             isHumanTurn.toggle()
                         }
@@ -41,6 +42,9 @@ struct ContentView: View {
             }
             .padding()
         }
+    }
+    func isSquareOccupied(in moves: [Move?], forIndex index: Int) ->Bool {
+        return moves.contains { $0?.boardIndex == index}
     }
 }
 
