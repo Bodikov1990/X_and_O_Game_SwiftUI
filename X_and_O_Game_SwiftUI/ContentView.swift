@@ -33,8 +33,7 @@ struct ContentView: View {
                         }
                         .onTapGesture {
                             if isSquareOccupied(in: moves, forIndex: indexOfCircle) { return }
-                            moves[indexOfCircle] = Move(player: isHumanTurn ? .human : .computer, boardIndex: indexOfCircle)
-                            isHumanTurn.toggle()
+                            moves[indexOfCircle] = Move(player: .human, boardIndex: indexOfCircle)
                         }
                     }
                 }
@@ -45,6 +44,16 @@ struct ContentView: View {
     }
     func isSquareOccupied(in moves: [Move?], forIndex index: Int) ->Bool {
         return moves.contains { $0?.boardIndex == index}
+    }
+    
+    func determinePositionOfComputer(in moves: [Move?]) -> Int {
+        var movePosition = Int.random(in: 0..<9)
+        
+        while isSquareOccupied(in: moves, forIndex: movePosition){
+            var movePosition = Int.random(in: 0..<9)
+        }
+        
+        return movePosition
     }
 }
 
